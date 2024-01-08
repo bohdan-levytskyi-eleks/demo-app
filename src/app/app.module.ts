@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ParentComponent } from './components/parent/parent.component';
 import { ChiledComponent } from './components/chiled/chiled.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LoggerComponent } from './components/logger/logger.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ParentComponent,
     ChiledComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoggerComponent
   ],
   imports: [
     BrowserModule,

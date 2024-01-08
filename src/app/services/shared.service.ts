@@ -5,8 +5,8 @@ import { Subject, timer } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-  sharedSubject: Subject<any> = new Subject<any>();
-  count = 0;
+  sharedSubject: Subject<string> = new Subject<string>();
+  
   constructor() {}
 
 

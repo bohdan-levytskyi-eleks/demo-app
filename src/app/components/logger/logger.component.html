@@ -1,0 +1,12 @@
+<h3>Logger</h3>
+
+<div *ngFor="let logg of loggerService.loggs | async">
+    <span *ngIf="logg.devider">
+        {{ logg.logg }}
+        <hr/>
+        <hr/>
+    </span>
+    <span *ngIf="!logg.devider">
+        {{ logg.logg }}
+    </span>
+</div>

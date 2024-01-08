@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { LoggerService } from 'src/app/services/logger.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -9,19 +11,29 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class ChiledComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
-  count = 0;
   
-  constructor(private readonly sharedService: SharedService) { }
+  constructor(
+    private readonly sharedService: SharedService,
+    private readonly loggerService: LoggerService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
-    console.log('chiled component init', this.count);
-    this.sharedService.sharedSubject.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      console.log(res, '>> ');
+    this.loggerService.addLogg({logg: 'child-init', devider: false})
+    this.sharedService.sharedSubject.pipe(takeUntil(this.destroy$)).subscribe((res: string) => {
+      this.loggerService.addLogg({logg: res, devider: false})
     })
   }
 
+  onBack() {
+    this.router.navigate(['..'], {
+      relativeTo: this.route
+    });
+  }
+
   ngOnDestroy(): void {
-    console.log('chiled component destroy', ++this.count);
+    this.loggerService.addLogg({logg: 'child-destroy', devider: true})
     this.destroy$.next(true);
     this.destroy$.complete();
   }
